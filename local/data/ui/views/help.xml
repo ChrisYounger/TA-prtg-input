@@ -1,0 +1,28 @@
+<dashboard>
+  <label>Help</label>
+  <row><panel><html>
+  
+This modular input can retrieve data from Paessler PRTG Network Monitor. The PRTG API is excellent and provides access to almost all data. The typical use case is to periodically retrieve sensor status and values.  <br /> <br />
+
+The recommended format for retreiving data is the JSON format, and this should work correctly with minimal customisation. If you want to use other data formats then you will need to create Splunk parsing properties and possibly field extractions etc. <br /> <br />
+
+In PRTG, naviagate to <code>Setup</code> <i class="icon-arrow-right"></i> <code>API</code> for documentation as well as a query builder that is useful for constructing a URL that can be used in this modular input. The documention in the PRTG UI easiest to read, but online API documentation is also available <a href="https://www.paessler.com/manuals/prtg/application_programming_interface_api_definition" target="_blank">online</a>.<br /><br /><br />
+
+<h2>Examples:</h2><br />
+
+Retreiving all sensors:
+<pre class="highlight"><code>/api/table.json?content=sensors&amp;output=json&amp;columns=objid,probe,group,device,sensor,status,message,lastvalue,priority&amp;count=1000
+</code></pre><br />
+
+Retreving specific sensor (includes child sensors):
+<pre class="highlight"><code>/api/table.json?content=sensors&amp;output=json&amp;id=2003&amp;columns=objid,probe,group,device,sensor,status,message,lastvalue,priority&amp;count=1000
+</code></pre><br />
+
+Retreving all sensors in warning or alarm status:
+<pre class="highlight"><code>/api/table.json?content=sensors&amp;count=1000&amp;output=json&amp;columns=objid,probegroupdevice,device,sensor,status,lastvalue,message,priority&amp;sortby=priority&amp;filter_status=4&amp;filter_status=5&amp;filter_status=10&amp;filter_status=13&amp;filter_status=14
+</code></pre><br />
+
+
+  
+  </html></panel></row>
+</dashboard>
