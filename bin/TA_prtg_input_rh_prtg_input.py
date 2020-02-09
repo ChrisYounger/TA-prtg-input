@@ -37,7 +37,7 @@ fields = [
         'url_path_of_api',
         required=True,
         encrypted=False,
-        default='admin',
+        default=None,
         validator=validator.String(
             min_len=0, 
             max_len=8192, 

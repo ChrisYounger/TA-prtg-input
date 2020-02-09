@@ -1,390 +1,389 @@
 {
+    "meta": {
+        "name": "TA-prtg-input",
+        "displayName": "PRTG Input",
+        "version": "1.0.0",
+        "apiVersion": "3.0.0",
+        "restRoot": "TA_prtg_input"
+    },
     "pages": {
-        "inputs": {
-            "table": {
-                "moreInfo": [
-                    {
-                        "field": "name", 
-                        "label": "Name"
-                    }, 
-                    {
-                        "field": "interval", 
-                        "label": "Interval"
-                    }, 
-                    {
-                        "field": "index", 
-                        "label": "Index"
-                    }, 
-                    {
-                        "field": "disabled", 
-                        "label": "Status"
-                    }, 
-                    {
-                        "field": "url_path_of_api", 
-                        "label": "URL path of API"
-                    }, 
-                    {
-                        "field": "split_json_arrays", 
-                        "label": "Split JSON arrays"
-                    }, 
-                    {
-                        "field": "custom_sourcetype", 
-                        "label": "Custom sourcetype"
-                    }
-                ], 
-                "header": [
-                    {
-                        "field": "name", 
-                        "label": "Name"
-                    }, 
-                    {
-                        "field": "interval", 
-                        "label": "Interval"
-                    }, 
-                    {
-                        "field": "index", 
-                        "label": "Index"
-                    }, 
-                    {
-                        "field": "disabled", 
-                        "label": "Status"
-                    }
-                ], 
-                "actions": [
-                    "edit", 
-                    "enable", 
-                    "delete", 
-                    "clone"
-                ]
-            }, 
-            "description": "Manage your data inputs", 
-            "title": "Inputs", 
-            "services": [
-                {
-                    "entity": [
-                        {
-                            "field": "name", 
-                            "validators": [
-                                {
-                                    "pattern": "^[a-zA-Z]\\w*$", 
-                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.", 
-                                    "type": "regex"
-                                }, 
-                                {
-                                    "maxLength": 100, 
-                                    "minLength": 1, 
-                                    "errorMsg": "Length of input name should be between 1 and 100", 
-                                    "type": "string"
-                                }
-                            ], 
-                            "label": "Name", 
-                            "type": "text", 
-                            "required": true, 
-                            "help": "Enter a unique name for the data input"
-                        }, 
-                        {
-                            "field": "interval", 
-                            "validators": [
-                                {
-                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$", 
-                                    "errorMsg": "Interval must be an integer.", 
-                                    "type": "regex"
-                                }
-                            ], 
-                            "label": "Interval", 
-                            "type": "text", 
-                            "required": true, 
-                            "help": "Time interval of input in seconds."
-                        }, 
-                        {
-                            "field": "index", 
-                            "options": {
-                                "createSearchChoice": true, 
-                                "blackList": "^_.*$", 
-                                "endpointUrl": "data/indexes"
-                            }, 
-                            "validators": [
-                                {
-                                    "maxLength": 80, 
-                                    "minLength": 1, 
-                                    "errorMsg": "Length of index name should be between 1 and 80.", 
-                                    "type": "string"
-                                }
-                            ], 
-                            "label": "Index", 
-                            "type": "singleSelect", 
-                            "required": true, 
-                            "defaultValue": "default"
-                        }, 
-                        {
-                            "field": "url_path_of_api", 
-                            "options": {
-                                "placeholder": "/api/table.json?content=sensors&output=json&count=1000&columns=objid,probe,group,device,sensor,status,message,lastvalue,priority"
-                            }, 
-                            "validators": [
-                                {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of text input is 8192", 
-                                    "type": "string"
-                                }
-                            ], 
-                            "label": "URL path of API", 
-                            "type": "text", 
-                            "required": true, 
-                            "defaultValue": "admin", 
-                            "help": "E.g. /api/table.json?content=sensors&output=json&count=1000&columns=objid,probe,group,device,sensor,status,message,priority"
-                        }, 
-                        {
-                            "field": "split_json_arrays", 
-                            "label": "Split JSON arrays", 
-                            "type": "checkbox", 
-                            "required": false, 
-                            "defaultValue": true, 
-                            "help": ""
-                        }, 
-                        {
-                            "field": "custom_sourcetype", 
-                            "options": {
-                                "placeholder": "prtg:json"
-                            }, 
-                            "validators": [
-                                {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of text input is 8192", 
-                                    "type": "string"
-                                }
-                            ], 
-                            "label": "Custom sourcetype", 
-                            "type": "text", 
-                            "required": false, 
-                            "defaultValue": "prtg:json", 
-                            "help": "Sourcetype \"prtg:json\" is a good default for output=json queries with \"Split JSON arrays\" enabled. If using other PRTG output methods you will need to create parsing props yourself."
-                        }
-                    ], 
-                    "title": "PRTG", 
-                    "name": "prtg_input"
-                }
-            ]
-        }, 
         "configuration": {
-            "description": "Set up your add-on", 
-            "title": "Configuration", 
+            "title": "Configuration",
+            "description": "Set up your add-on",
             "tabs": [
                 {
+                    "name": "proxy",
+                    "title": "Proxy",
                     "entity": [
                         {
-                            "field": "proxy_enabled", 
-                            "label": "Enable", 
+                            "field": "proxy_enabled",
+                            "label": "Enable",
                             "type": "checkbox"
-                        }, 
+                        },
                         {
-                            "field": "proxy_type", 
+                            "field": "proxy_type",
+                            "label": "Proxy Type",
+                            "type": "singleSelect",
                             "options": {
+                                "disableSearch": true,
                                 "autoCompleteFields": [
                                     {
-                                        "label": "http", 
+                                        "label": "http",
                                         "value": "http"
-                                    }, 
+                                    },
                                     {
-                                        "label": "socks4", 
+                                        "label": "socks4",
                                         "value": "socks4"
-                                    }, 
+                                    },
                                     {
-                                        "label": "socks5", 
+                                        "label": "socks5",
                                         "value": "socks5"
                                     }
-                                ], 
-                                "disableSearch": true
-                            }, 
-                            "defaultValue": "http", 
-                            "label": "Proxy Type", 
-                            "type": "singleSelect"
-                        }, 
+                                ]
+                            },
+                            "defaultValue": "http"
+                        },
                         {
-                            "field": "proxy_url", 
+                            "field": "proxy_url",
+                            "label": "Host",
+                            "type": "text",
                             "validators": [
                                 {
-                                    "maxLength": 4096, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max host length is 4096", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 4096,
+                                    "errorMsg": "Max host length is 4096"
                                 }
-                            ], 
-                            "label": "Host", 
-                            "type": "text"
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "proxy_port", 
+                            "field": "proxy_port",
+                            "label": "Port",
+                            "type": "text",
                             "validators": [
                                 {
+                                    "type": "number",
                                     "range": [
-                                        1, 
+                                        1,
                                         65535
-                                    ], 
-                                    "type": "number"
+                                    ]
                                 }
-                            ], 
-                            "label": "Port", 
-                            "type": "text"
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "proxy_username", 
+                            "field": "proxy_username",
+                            "label": "Username",
+                            "type": "text",
                             "validators": [
                                 {
-                                    "maxLength": 50, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of username is 50", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 50,
+                                    "errorMsg": "Max length of username is 50"
                                 }
-                            ], 
-                            "label": "Username", 
-                            "type": "text"
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "proxy_password", 
-                            "encrypted": true, 
+                            "field": "proxy_password",
+                            "label": "Password",
+                            "type": "text",
+                            "encrypted": true,
                             "validators": [
                                 {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of password is 8192", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of password is 8192"
                                 }
-                            ], 
-                            "label": "Password", 
-                            "type": "text"
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "proxy_rdns", 
-                            "label": "Remote DNS resolution", 
+                            "field": "proxy_rdns",
+                            "label": "Remote DNS resolution",
                             "type": "checkbox"
                         }
-                    ], 
+                    ],
                     "options": {
                         "saveValidator": "function(formData) { if(!formData.proxy_enabled || formData.proxy_enabled === '0') {return true; } if(!formData.proxy_url) { return 'Proxy Host can not be empty'; } if(!formData.proxy_port) { return 'Proxy Port can not be empty'; } return true; }"
-                    }, 
-                    "title": "Proxy", 
-                    "name": "proxy"
-                }, 
+                    }
+                },
                 {
+                    "name": "logging",
+                    "title": "Logging",
                     "entity": [
                         {
-                            "field": "loglevel", 
+                            "field": "loglevel",
+                            "label": "Log level",
+                            "type": "singleSelect",
                             "options": {
+                                "disableSearch": true,
                                 "autoCompleteFields": [
                                     {
-                                        "label": "DEBUG", 
+                                        "label": "DEBUG",
                                         "value": "DEBUG"
-                                    }, 
+                                    },
                                     {
-                                        "label": "INFO", 
+                                        "label": "INFO",
                                         "value": "INFO"
-                                    }, 
+                                    },
                                     {
-                                        "label": "WARNING", 
+                                        "label": "WARNING",
                                         "value": "WARNING"
-                                    }, 
+                                    },
                                     {
-                                        "label": "ERROR", 
+                                        "label": "ERROR",
                                         "value": "ERROR"
-                                    }, 
+                                    },
                                     {
-                                        "label": "CRITICAL", 
+                                        "label": "CRITICAL",
                                         "value": "CRITICAL"
                                     }
-                                ], 
-                                "disableSearch": true
-                            }, 
-                            "defaultValue": "INFO", 
-                            "label": "Log level", 
-                            "type": "singleSelect"
+                                ]
+                            },
+                            "defaultValue": "INFO"
                         }
-                    ], 
-                    "title": "Logging", 
-                    "name": "logging"
-                }, 
+                    ]
+                },
                 {
+                    "name": "additional_parameters",
+                    "title": "Add-on Settings",
                     "entity": [
                         {
-                            "field": "username", 
+                            "field": "username",
+                            "label": "Username",
+                            "type": "text",
+                            "help": "",
+                            "required": true,
+                            "defaultValue": "",
                             "validators": [
                                 {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of text input is 8192", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of text input is 8192"
                                 }
-                            ], 
-                            "label": "Username", 
-                            "type": "text", 
-                            "required": true, 
-                            "defaultValue": "", 
-                            "help": ""
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "password", 
-                            "encrypted": true, 
+                            "field": "password",
+                            "label": "Password",
+                            "type": "text",
+                            "help": "(Define only one of Password or Passhash)\n",
+                            "required": false,
+                            "defaultValue": "",
+                            "encrypted": true,
                             "validators": [
                                 {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of password is 8192", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of password is 8192"
                                 }
-                            ], 
-                            "label": "Password", 
-                            "type": "text", 
-                            "required": false, 
-                            "defaultValue": "", 
-                            "help": "(Define only one of Password or Passhash)\n"
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "passhash", 
-                            "encrypted": true, 
+                            "field": "passhash",
+                            "label": "Passhash",
+                            "type": "text",
+                            "help": "",
+                            "required": false,
+                            "defaultValue": "",
+                            "encrypted": true,
                             "validators": [
                                 {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of password is 8192", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of password is 8192"
                                 }
-                            ], 
-                            "label": "Passhash", 
-                            "type": "text", 
-                            "required": false, 
-                            "defaultValue": "", 
-                            "help": ""
-                        }, 
+                            ]
+                        },
                         {
-                            "field": "base_url", 
+                            "field": "base_url",
+                            "label": "Base URL",
+                            "type": "text",
+                            "help": "In format: https://<hostname>:port",
+                            "required": true,
+                            "defaultValue": "https://<hostname>:port",
                             "validators": [
                                 {
-                                    "maxLength": 8192, 
-                                    "minLength": 0, 
-                                    "errorMsg": "Max length of text input is 8192", 
-                                    "type": "string"
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of text input is 8192"
                                 }
-                            ], 
-                            "label": "Base URL", 
-                            "type": "text", 
-                            "required": true, 
-                            "defaultValue": "https://<hostname>:port", 
-                            "help": "In format: https://<hostname>:port"
+                            ]
                         }
-                    ], 
-                    "title": "Add-on Settings", 
-                    "name": "additional_parameters"
+                    ]
+                }
+            ]
+        },
+        "inputs": {
+            "title": "Inputs",
+            "description": "Manage your data inputs",
+            "table": {
+                "header": [
+                    {
+                        "field": "name",
+                        "label": "Name"
+                    },
+                    {
+                        "field": "interval",
+                        "label": "Interval"
+                    },
+                    {
+                        "field": "index",
+                        "label": "Index"
+                    },
+                    {
+                        "field": "disabled",
+                        "label": "Status"
+                    }
+                ],
+                "moreInfo": [
+                    {
+                        "field": "name",
+                        "label": "Name"
+                    },
+                    {
+                        "field": "interval",
+                        "label": "Interval"
+                    },
+                    {
+                        "field": "index",
+                        "label": "Index"
+                    },
+                    {
+                        "field": "disabled",
+                        "label": "Status"
+                    },
+                    {
+                        "field": "url_path_of_api",
+                        "label": "URL path of API"
+                    },
+                    {
+                        "field": "split_json_arrays",
+                        "label": "Split JSON arrays"
+                    },
+                    {
+                        "field": "custom_sourcetype",
+                        "label": "Custom sourcetype"
+                    }
+                ],
+                "actions": [
+                    "edit",
+                    "enable",
+                    "delete",
+                    "clone"
+                ]
+            },
+            "services": [
+                {
+                    "name": "prtg_input",
+                    "title": "PRTG",
+                    "entity": [
+                        {
+                            "field": "name",
+                            "label": "Name",
+                            "type": "text",
+                            "help": "Enter a unique name for the data input",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "pattern": "^[a-zA-Z]\\w*$",
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores."
+                                },
+                                {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 100,
+                                    "errorMsg": "Length of input name should be between 1 and 100"
+                                }
+                            ]
+                        },
+                        {
+                            "field": "interval",
+                            "label": "Interval",
+                            "type": "text",
+                            "required": true,
+                            "help": "Time interval of input in seconds.",
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$",
+                                    "errorMsg": "Interval must be an integer."
+                                }
+                            ]
+                        },
+                        {
+                            "field": "index",
+                            "label": "Index",
+                            "type": "singleSelect",
+                            "defaultValue": "default",
+                            "options": {
+                                "endpointUrl": "data/indexes",
+                                "blackList": "^_.*$",
+                                "createSearchChoice": true
+                            },
+                            "required": true,
+                            "validators": [
+                                {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 80,
+                                    "errorMsg": "Length of index name should be between 1 and 80."
+                                }
+                            ]
+                        },
+                        {
+                            "field": "url_path_of_api",
+                            "label": "URL path of API",
+                            "help": "E.g. /api/table.json?content=sensors&output=json&count=1000&columns=objid,probe,group,device,sensor,status,message,priority",
+                            "required": true,
+                            "type": "text",
+                            "validators": [
+                                {
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "options": {
+                                "placeholder": "/api/table.json?content=sensors&output=json&count=1000&columns=objid,probe,group,device,sensor,status,message,lastvalue,priority"
+                            }
+                        },
+                        {
+                            "field": "split_json_arrays",
+                            "label": "Split JSON arrays",
+                            "help": "",
+                            "required": false,
+                            "type": "checkbox",
+                            "defaultValue": true
+                        },
+                        {
+                            "field": "custom_sourcetype",
+                            "label": "Custom sourcetype",
+                            "help": "Sourcetype \"prtg:json\" is a good default for output=json queries with \"Split JSON arrays\" enabled. If using other PRTG output methods you will need to create parsing props yourself.",
+                            "required": false,
+                            "type": "text",
+                            "defaultValue": "prtg:json",
+                            "validators": [
+                                {
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "maxLength": 8192,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "options": {
+                                "placeholder": "prtg:json"
+                            }
+                        }
+                    ]
                 }
             ]
         }
-    }, 
-    "meta": {
-        "displayName": "PRTG Input", 
-        "version": "1.0.0", 
-        "restRoot": "TA_prtg_input", 
-        "name": "TA-prtg-input", 
-        "apiVersion": "3.0.0"
     }
 }
